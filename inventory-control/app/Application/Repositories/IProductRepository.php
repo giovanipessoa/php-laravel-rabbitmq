@@ -10,5 +10,5 @@ interface IProductRepository
     public function save(Product $product): void;
     public function findAll(): array;
     public function findById(int $id): Product;
-    public function delete(int $id): void;
+    public function delete(Product $product): void;
 }
