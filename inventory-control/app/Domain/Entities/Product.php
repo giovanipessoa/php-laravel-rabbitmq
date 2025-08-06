@@ -21,25 +21,6 @@ class Product extends Model
         'active',
     ];
 
-    // explicit constructor to ensure validation
-
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-
-        if (empty($this->name)) {
-            throw new InvalidArgumentException("Name is required");
-        }
-
-        if ($this->price < 0) {
-            throw new InvalidArgumentException("Price must be greater than 0");
-        }
-
-        if ($this->stock < 0) {
-            throw new InvalidArgumentException("Stock must be greater than 0");
-        }
-    }
-
     // behavior methods to the domain
 
     public function increaseStock(int $quantity): void
