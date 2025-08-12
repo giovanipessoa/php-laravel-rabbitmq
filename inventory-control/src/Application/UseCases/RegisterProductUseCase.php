@@ -1,15 +1,15 @@
 <?php
 
-// app/Application/UseCases/RegisterProductUseCase.php
-namespace App\Application\UseCases;
+// src/Application/UseCases/RegisterProductUseCase.php
+namespace AppCore\Application\UseCases;
 
-use App\Application\Repositories\IProductRepository;
-use App\Domain\Entities\Product;
+use AppCore\Application\Repositories\InterfaceProductRepository;
+use AppCore\Domain\Entities\Product;
 use InvalidArgumentException;
 
 class RegisterProductUseCase
 {
-    public function __construct(private IProductRepository $productRepository) {}
+    public function __construct(private InterfaceProductRepository $productRepository) {}
 
     public function execute(array $productData): Product
     {
@@ -26,18 +26,18 @@ class RegisterProductUseCase
                 throw new InvalidArgumentException("Stock must be greater than 0");
             }
 
-            $product = new Product([
-                'name' => $productData['name'],
-                'description' => $productData['description'],
-                'price' => $productData['price'],
-                'stock' => $productData['stock'],
-                'active' => true
-            ]);
+            $product = new Product(
+                $productData['name'],
+                $productData['price'],
+                $productData['stock'],
+                $productData['description'],
+                true
+            );
+
+            $this->productRepository->save($product);
+            return $product;
         } catch (InvalidArgumentException $e) {
             throw new InvalidArgumentException($e->getMessage());
         }
-
-        $this->productRepository->save($product);
-        return $product;
     }
 }

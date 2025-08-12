@@ -1,10 +1,10 @@
 <?php
 
-// app/Infra/Providers/AppServiceProvider.php
-namespace App\Infra\Providers;
+// app/Infrastructure/Providers/AppServiceProvider.php
+namespace App\Infrastructure\Providers;
 
-use App\Application\Repositories\IProductRepository;
-use App\Infra\Repositories\EProductRepository;
+use AppCore\Application\Repositories\InterfaceProductRepository;
+use App\Infrastructure\Persistence\EloquentProductRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         // bind interface to its concrete implementation
-        $this->app->bind(IProductRepository::class, EProductRepository::class);
+        $this->app->bind(InterfaceProductRepository::class, EloquentProductRepository::class);
     }
 
     /**
