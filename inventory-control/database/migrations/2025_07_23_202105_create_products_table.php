@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->string('price', 10, 2);
-            $table->string('stock')->default(0);
-            $table->string('active')->default(1);
+            $table->decimal('price', 10, 2);
+            $table->integer('stock')->default(0);
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }
