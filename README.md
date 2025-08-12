@@ -1,0 +1,1 @@
+# Para entender a arquitetura e os princípios de design utilizados neste projeto, confira o artigo completo que detalha a implementação de DDD e Clean Architecture: [PHP, Laravel, Clean Architecture e DDD](https://dev.to/giovanipessoa/php-laravel-clean-architecture-e-ddd-4j03)
