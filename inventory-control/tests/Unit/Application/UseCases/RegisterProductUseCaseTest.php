@@ -5,6 +5,7 @@ namespace Tests\Unit\Application\UseCases;
 use PHPUnit\Framework\TestCase;
 use AppCore\Application\UseCases\RegisterProductUseCase;
 use AppCore\Application\Repositories\InterfaceProductRepository;
+use AppCore\Application\DTO\RegisterProductData;
 use AppCore\Domain\Entities\Product;
 use Mockery;
 
@@ -34,12 +35,13 @@ class RegisterProductUseCaseTest extends TestCase
      */
     public function testExecuteSavesProductSuccessfully()
     {
-        $productData = [
-            'name' => 'Caneta',
-            'description' => 'Caneta Azul',
-            'price' => 2.50,
-            'stock' => 10,
-        ];
+        $productData = new RegisterProductData(
+            name: 'Caneta',
+            description: 'Caneta Azul',
+            price: 2.50,
+            stock: 10,
+            active: true
+        );
 
         $this->productRepositoryMock->shouldReceive('save')
             ->once()

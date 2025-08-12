@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use AppCore\Application\UseCases\RegisterProductUseCase;
+use AppCore\Application\DTO\RegisterProductData;
 
 class ProductController extends Controller
 {
@@ -29,6 +30,7 @@ class ProductController extends Controller
     public function store(Request $request, RegisterProductUseCase $registerProductUseCase)
     {
         try {
+            /*
             $request->validate([
                 'name' => 'required|string|max:255',
                 'description' => 'nullable|string',
@@ -41,8 +43,11 @@ class ProductController extends Controller
                 'stock.required' => 'Stock is required',
                 'stock.integer' => 'Stock must be an integer',
             ]);
+            */
 
-            $registerProductUseCase->execute($request->all());
+            $productData = RegisterProductData::fromRequest($request);
+
+            $registerProductUseCase->execute($productData);
 
             return redirect()->route('products.index')
                 ->with('success', "Product created successfully!");
