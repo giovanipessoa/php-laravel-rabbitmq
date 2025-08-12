@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Application\UseCases\RegisterProductUseCase;
+use AppCore\Application\UseCases\RegisterProductUseCase;
 
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * display a listing of the resource.
      */
     public function index()
     {
@@ -16,7 +16,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * show the form for creating a new resource.
      */
     public function create()
     {
@@ -24,7 +24,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * store a newly created resource in storage.
      */
     public function store(Request $request, RegisterProductUseCase $registerProductUseCase)
     {
@@ -42,10 +42,10 @@ class ProductController extends Controller
                 'stock.integer' => 'Stock must be an integer',
             ]);
 
-            $product = $registerProductUseCase->execute($request->all());
+            $registerProductUseCase->execute($request->all());
 
             return redirect()->route('products.index')
-                ->with('success', "Product '{$product->name}' created successfully!");
+                ->with('success', "Product created successfully!");
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()
                 ->withErrors($e->errors())
@@ -64,7 +64,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * display the specified resource.
      */
     public function show(string $id)
     {
@@ -72,7 +72,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
@@ -80,7 +80,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
@@ -88,7 +88,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
